@@ -82,14 +82,17 @@ public class Bolinha {
 
         boolean rebateuEmX = false;
         boolean rebateuEmY = false;
-        /*Após os calculo, é iniciada a checagem de colisão com as birdas da tela, começando a checagem com a parte superior
-        *
+        /*Após os calculo, é iniciada a checagem de colisão com as bordas da tela, começando a checagem com a parte superior
+        * Caso mPosiçãoY seja menor que zero a vleocidade é invertidad e é descontado do rebote, que estipulamos em 60% da velocidade
+        * atual. Tambem setamos o rebateuEmY para true.
         * */
 
         if (mPositionY < 0) {
             mPositionY = 0;
             mVelocidadeY = -mVelocidadeY * REBOTE;
             rebateuEmY = true;
+
+            /*É conferido também a borda inferior da tela, caso isso aconteça, é feito uma logica similar ao de cima*/
         } else if (mPositionY + mImgBolinha.getHeight() > mAlturaTela) {
             mPositionY = mAlturaTela - mImgBolinha.getHeight();
             mVelocidadeY = -mVelocidadeY * REBOTE;
@@ -99,7 +102,7 @@ public class Bolinha {
         if (rebateuEmY && Math.abs(mVelocidadeY) < VELOCIDADE_MINIMA) {
             mVelocidadeY = 0;
         }
-
+        /*Lógica de colisão nas laterais é a mesmo lógica explicada acima*/
         if (mPositionX < 0) {
             mPositionX = 0;
             mVelocidadeX = -mVelocidadeX * REBOTE;
